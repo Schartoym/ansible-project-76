@@ -1,0 +1,9 @@
+- hosts: all
+  name: Deploy project
+  become: true
+  vars:
+    pip_install_packages:
+      - name: docker
+  roles:
+    - role: docker
+    - role: geerlingguy.pip

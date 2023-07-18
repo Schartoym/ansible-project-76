@@ -1,0 +1,12 @@
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: apt
+
+- name: Docker package status
+  ansible.builtin.debug:
+    msg: 'Docker-ce is already'
+  when: '"docker-ce" in ansible_facts.packages'
+
+- name: Install docker is absent
+  ansible.builtin.include_tasks: install-docker.yml
+  when: '"docker-ce" not in ansible_facts.packages'
