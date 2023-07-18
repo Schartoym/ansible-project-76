@@ -4,13 +4,13 @@ resource "yandex_lb_target_group" "ansible-76" {
   region_id = "ru-central1"
 
   target {
-    subnet_id = "${yandex_vpc_subnet.subnet-1.id}"
-    address   = "${yandex_compute_instance.vm-1.network_interface.0.ip_address}"
+    subnet_id = yandex_vpc_subnet.subnet-1.id
+    address   = yandex_compute_instance.vm-1.network_interface.0.ip_address
   }
 
   target {
-    subnet_id = "${yandex_vpc_subnet.subnet-1.id}"
-    address   = "${yandex_compute_instance.vm-2.network_interface.0.ip_address}"
+    subnet_id = yandex_vpc_subnet.subnet-1.id
+    address   = yandex_compute_instance.vm-2.network_interface.0.ip_address
   }
 }
 
@@ -27,7 +27,7 @@ resource "yandex_lb_network_load_balancer" "ansible-76-lb" {
   }
 
   attached_target_group {
-    target_group_id = "${yandex_lb_target_group.ansible-76.id}"
+    target_group_id = yandex_lb_target_group.ansible-76.id
 
     healthcheck {
       name = "http"
@@ -39,3 +39,9 @@ resource "yandex_lb_network_load_balancer" "ansible-76-lb" {
   }
 }
 
+output "load_balancer_ip_address" {
+  value = flatten(
+    [for l in yandex_lb_network_load_balancer.ansible-76-lb.listener : [
+      for a in l.external_address_spec : "${a.address}"
+  ]])[0]
+}
