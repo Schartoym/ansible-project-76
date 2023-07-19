@@ -42,6 +42,45 @@ provider "registry.terraform.io/hashicorp/local" {
   ]
 }
 
+provider "registry.terraform.io/hashicorp/tls" {
+  version = "4.0.4"
+  hashes = [
+    "h1:GZcFizg5ZT2VrpwvxGBHQ/hO9r6g0vYdQqx3bFD3anY=",
+    "zh:23671ed83e1fcf79745534841e10291bbf34046b27d6e68a5d0aab77206f4a55",
+    "zh:45292421211ffd9e8e3eb3655677700e3c5047f71d8f7650d2ce30242335f848",
+    "zh:59fedb519f4433c0fdb1d58b27c210b27415fddd0cd73c5312530b4309c088be",
+    "zh:5a8eec2409a9ff7cd0758a9d818c74bcba92a240e6c5e54b99df68fff312bbd5",
+    "zh:5e6a4b39f3171f53292ab88058a59e64825f2b842760a4869e64dc1dc093d1fe",
+    "zh:810547d0bf9311d21c81cc306126d3547e7bd3f194fc295836acf164b9f8424e",
+    "zh:824a5f3617624243bed0259d7dd37d76017097dc3193dac669be342b90b2ab48",
+    "zh:9361ccc7048be5dcbc2fafe2d8216939765b3160bd52734f7a9fd917a39ecbd8",
+    "zh:aa02ea625aaf672e649296bce7580f62d724268189fe9ad7c1b36bb0fa12fa60",
+    "zh:c71b4cd40d6ec7815dfeefd57d88bc592c0c42f5e5858dcc88245d371b4b8b1e",
+    "zh:dabcd52f36b43d250a3d71ad7abfa07b5622c69068d989e60b79b2bb4f220316",
+    "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
+  ]
+}
+
+provider "registry.terraform.io/vancluever/acme" {
+  version = "2.15.1"
+  hashes = [
+    "h1:KQ17Ex1BHA9fFJdsYMtAxAaXoUvwlWe95LYuB1nFrUc=",
+    "zh:08eef1525e3a3f7a253f89865b572d3e1852ff942651527fc43c89b79bd05f4b",
+    "zh:1d31bd1feaccb5126296a11e588982f033abb076b5ad1935d34b96bb9351c481",
+    "zh:2b4665cdec872d83843010f6778d4d1c97104743e46a2d266e33d4a17114af3e",
+    "zh:751eaa687f43e6e5e4ef934d241151217b91fe68c67ecbf100d8773f3f51c7f0",
+    "zh:760455a84acc51824f84a0ee4f0bcf0495a6a38e87cd7542da0b07d4f2f2c498",
+    "zh:951e4f7a1fff2e65404bca0e951315fab823681465000203b6323a44997355ea",
+    "zh:a32c823c55e752baf5dbafbb834f8e63f9812539f9ca95a6a0e7405295f13e87",
+    "zh:acdf08755ff2a6b18569e9837554c6645f7ffe57ac86b4388cd6545e7a5e02e7",
+    "zh:ae71cb1b177190c1e26bcf558aedcd786a77321ed473cc1e4253f77b6b80bc25",
+    "zh:b0ad3cf1078fdb9b3ab9dd2d015d5fa649bf8423e55c59944b6caad86175e40c",
+    "zh:bf552574724af4e088f89d396644b9c31e0c6556117822c747d4878c5cd22989",
+    "zh:d32fbc00f34e49a00a6ba4fce7d84a3d9c504189609c634ce368af6e7ba5a313",
+    "zh:da90abdb613bb28629fb6c86c91beff4ac91574eab6359b38980f88a80a5cf48",
+  ]
+}
+
 provider "registry.terraform.io/yandex-cloud/yandex" {
   version = "0.95.0"
   hashes = [
