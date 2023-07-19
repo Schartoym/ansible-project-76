@@ -38,10 +38,3 @@ resource "yandex_lb_network_load_balancer" "ansible-76-lb" {
     }
   }
 }
-
-output "load_balancer_ip_address" {
-  value = flatten(
-    [for l in yandex_lb_network_load_balancer.ansible-76-lb.listener : [
-      for a in l.external_address_spec : "${a.address}"
-  ]])[0]
-}

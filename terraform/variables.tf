@@ -43,9 +43,14 @@ variable "database_user" {
   description = "DB User"
 }
 
-
 variable "database_password" {
   type = string
   sensitive = true
   description = "DB Password"
+}
+
+variable "cloudflare_api_token" {
+  type = string
+  sensitive = true
+  description =  "Cloudflare API token"
 }
