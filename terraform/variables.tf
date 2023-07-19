@@ -36,6 +36,10 @@ variable "image_id" {
    description = "VM image id"
 }
 
+variable "database_name" {
+  type = string
+  description = "DB Name"
+}
 
 variable "database_user" {
   type = string

@@ -1,0 +1,6 @@
+redmine_project_directory: /projects/redmine
+redmine_container_env_file: "{{ redmine_project_directory }}/.env"
+redmine_network_name: redmine
+redmine_secret_base: uiMxh&vY518!
+redmine_container_name: redmine
+redmine_image_name: redmine:5.0.5

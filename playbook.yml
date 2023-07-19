@@ -7,3 +7,9 @@
   roles:
     - role: docker
     - role: geerlingguy.pip
+
+- hosts: webservers
+  name: Deploy redmine
+  become: true
+  roles:
+    - role: redmine

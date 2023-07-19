@@ -1,0 +1,11 @@
+- name: Ensure project dir exists
+  ansible.builtin.file:
+    path: "{{ redmine_project_directory }}"
+    state: directory
+    mode: '0755'
+
+- name: Generate ENV file
+  ansible.builtin.template:
+    src: env.j2
+    dest: "{{ redmine_container_env_file }}"
+    mode: "0600"

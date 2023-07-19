@@ -1,0 +1,5 @@
+- name: Generate env for Redmine
+  ansible.builtin.include_tasks: generate-env.yml
+
+- name: Run Redmine
+  ansible.builtin.include_tasks: start-container.yml

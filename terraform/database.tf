@@ -39,3 +39,15 @@ resource "yandex_mdb_postgresql_user" "db-user" {
   password   = var.database_password
   conn_limit = 50
 }
+
+resource "yandex_mdb_postgresql_database" "db" {
+  cluster_id = yandex_mdb_postgresql_cluster.ansible-76-cluster.id
+  name       = var.database_name
+  owner      = yandex_mdb_postgresql_user.db-user.name
+  lc_collate = "ru_RU.UTF-8"
+  lc_type    = "ru_RU.UTF-8"
+}
+
+output "database" {
+  value = yandex_mdb_postgresql_cluster.ansible-76-cluster.host
+}

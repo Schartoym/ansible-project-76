@@ -1,0 +1,16 @@
+- name: Create a network
+  community.docker.docker_network:
+    name: "{{ redmine_network_name }}"
+
+- name: Start Redmine container
+  community.docker.docker_container:
+    name: "{{ redmine_container_name }}"
+    labels:
+      description: "Redmine"
+    image: "{{ redmine_image_name }}"
+    restart_policy: unless-stopped
+    env_file: "{{ redmine_container_env_file }}"
+    networks:
+      - name: "{{ redmine_network_name }}"
+    published_ports:
+      80:3000
