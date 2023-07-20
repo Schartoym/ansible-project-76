@@ -9,7 +9,28 @@
     - role: geerlingguy.pip
 
 - hosts: webservers
-  name: Deploy redmine
+  name: Deploy redmine and Datadog
+  become: true
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        var: datadog_key
+  tags:
+    - debug
+
+- hosts: webservers
+  name: Deploy redmine and Datadog
   become: true
   roles:
     - role: redmine
+    - role: datadog.datadog
+  vars:
+    datadog_api_key: "{{ datadog_key }}"
+    datadog_site: "datadoghq.eu"
+    init_config:
+    instances:
+      - name: External service
+        url: "https://{{ domain_name }}"
+
+      - name: Internal
+        url: http://127.0.0.1
