@@ -6,9 +6,6 @@ terraform {
     cloudflare = {
       source = "cloudflare/cloudflare"
     }
-    acme = {
-      source  = "vancluever/acme"
-    }
   }
 
   backend "s3" {
@@ -32,8 +29,4 @@ provider "yandex" {
 
 provider "cloudflare" {
   api_token = var.cloudflare_api_token
-}
-
-provider "acme" {
-  server_url = "https://acme-v02.api.letsencrypt.org/directory"
 }

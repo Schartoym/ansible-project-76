@@ -2,3 +2,9 @@
 %{ for instance in instances ~}
 ${instance.name} ansible_ssh_host=${instance.network_interface.0.nat_ip_address}
 %{ endfor ~}
+
+[webservers:vars]
+database_name=${db.name}
+database_user=${db.user}
+database_host=${db.host}
+database_port=6432

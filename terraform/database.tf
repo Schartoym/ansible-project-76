@@ -48,6 +48,10 @@ resource "yandex_mdb_postgresql_database" "db" {
   lc_type    = "ru_RU.UTF-8"
 }
 
+locals {
+  database_host = yandex_mdb_postgresql_cluster.project-cluster.host.0.fqdn
+}
+
 output "database" {
   value = yandex_mdb_postgresql_cluster.project-cluster.host.0.fqdn
 }
