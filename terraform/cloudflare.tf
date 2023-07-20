@@ -1,31 +1,41 @@
-locals {
-  load_balancer_ip_address = flatten(
-    [for l in yandex_lb_network_load_balancer.ansible-76-lb.listener : [
-      for a in l.external_address_spec : "${a.address}"
-  ]])[0]
-}
-
-resource "cloudflare_account" "schartoym" {
+resource "cloudflare_account" "project" {
   name = "Schartoym@gmail.com's Account"
 }
 
-resource "cloudflare_zone" "bulka_dev" {
-  account_id = cloudflare_account.schartoym.id
-  zone       = "bulka.dev"
+resource "cloudflare_zone" "project-zone" {
+  account_id = cloudflare_account.project.id
+  zone       = var.domain_name
 }
 
-resource "cloudflare_record" "bulka_dev_a" {
-  zone_id = cloudflare_zone.bulka_dev.id
+resource "cloudflare_record" "project-a-record" {
+  zone_id = cloudflare_zone.project-zone.id
   name    = "@"
   value   = local.load_balancer_ip_address
   type    = "A"
   ttl     = 3600
 }
 
-resource "cloudflare_record" "bulka_dev_www" {
-  zone_id = cloudflare_zone.bulka_dev.id
+resource "cloudflare_record" "project-a-record-www" {
+  zone_id = cloudflare_zone.project-zone.id
   name    = "www"
   value   = local.load_balancer_ip_address
   type    = "A"
+  ttl     = 3600
+}
+
+
+resource "cloudflare_record" "project-acme-cname" {
+  zone_id = cloudflare_zone.project-zone.id
+  name    = "_acme-challenge"
+  value   = "${yandex_cm_certificate.project.id}.cm.yandexcloud.net"
+  type    = "CNAME"
+  ttl     = 3600
+}
+
+resource "cloudflare_record" "project-acme-cname-www" {
+  zone_id = cloudflare_zone.project-zone.id
+  name    = "_acme-challenge.www.${var.domain_name}"
+  value   = "${yandex_cm_certificate.project.id}.cm.yandexcloud.net"
+  type    = "CNAME"
   ttl     = 3600
 }

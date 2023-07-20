@@ -49,5 +49,5 @@ resource "yandex_mdb_postgresql_database" "db" {
 }
 
 output "database" {
-  value = yandex_mdb_postgresql_cluster.ansible-76-cluster.host
+  value = yandex_mdb_postgresql_cluster.ansible-76-cluster.host.0.fqdn
 }

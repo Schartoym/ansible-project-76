@@ -58,3 +58,8 @@ variable "cloudflare_api_token" {
   sensitive = true
   description =  "Cloudflare API token"
 }
+
+variable "domain_name" {
+  type = string
+  description = "Domain name"
+}
