@@ -9,7 +9,7 @@ resource "local_file" "ansible_inventory" {
       user: var.database_user,
       host: local.database_host
     }
-
+    domain_name: var.domain_name
   })
   filename = "../inventory.ini"
 }
