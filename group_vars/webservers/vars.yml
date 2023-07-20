@@ -1,0 +1,8 @@
+datadog_checks:
+  http:
+    init_config:
+    instances:
+      - name: from-external
+        url: "https://{{ domain_name }}"
+      - name: internal
+        url: http://127.0.0.1
