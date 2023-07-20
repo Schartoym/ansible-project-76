@@ -3,6 +3,7 @@
 - Две виртуальные машины
 - Кластер PostgreSql
 - Сетевой балансировщик нагрузки
+- Сертификат от Let's Encrypt
 
 ## Провайдер
 Используеутся Яндекс Облако
@@ -28,6 +29,7 @@ terrafrom apply
 - `folder_id` - Id папки в облаке
 - `service_account_id` - Id сервисного аккаунта
 - `zone` - зона доступности. По умолчанию `ru-central-1`
+- `domain_name` - доменное имя, по которому будет доступен проект
 
 ### Для виртуальных машин
 - `image_id` - Id образа. Чтобы получить список всех доступных
@@ -39,11 +41,15 @@ yc compute image list --folder-id standard-images
 ### Для Postgresql
 - `database_user` - пользователь БД
 - `database_password` - пароль для пользователя БД
+- `database_name` - имя БД
+
+### Для Cloudflare
+- `cloudflare_api_token` - токен для работы с Cl
 
 ### Секреты
 в файле `secret.auto.vars` (добавлен в `.gitignore`) хранятся секреты:
 - `cloud_token` 
 - `database_user`
 - `database_password`
-
+- `cloudflare_api_token`
 
