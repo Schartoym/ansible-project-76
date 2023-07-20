@@ -1,5 +1,5 @@
 # https://registry.terraform.io/providers/yandex-cloud/yandex/0.95.0/docs/resources/alb_target_group
-resource "yandex_alb_target_group" "ansible-76" {
+resource "yandex_alb_target_group" "project" {
   name = "ansible-76-tagret-group"
 
   target {
@@ -14,14 +14,14 @@ resource "yandex_alb_target_group" "ansible-76" {
 }
 
 # https://registry.terraform.io/providers/yandex-cloud/yandex/0.95.0/docs/resources/alb_backend_group
-resource "yandex_alb_backend_group" "ansible-76" {
+resource "yandex_alb_backend_group" "project" {
   name = "ansible-76-backend-group"
 
   http_backend {
     name             = "http-backend"
     weight           = 1
     port             = 80
-    target_group_ids = ["${yandex_alb_target_group.ansible-76.id}"]
+    target_group_ids = ["${yandex_alb_target_group.project.id}"]
     healthcheck {
       timeout  = "5s"
       interval = "5s"
@@ -33,13 +33,13 @@ resource "yandex_alb_backend_group" "ansible-76" {
 }
 
 # https://registry.terraform.io/providers/yandex-cloud/yandex/0.95.0/docs/resources/alb_http_router
-resource "yandex_alb_http_router" "ansible-76" {
+resource "yandex_alb_http_router" "project" {
   name = "ansible-76-router"
 }
 
 
 # https://registry.terraform.io/providers/yandex-cloud/yandex/0.95.0/docs/resources/alb_load_balancer
-resource "yandex_alb_load_balancer" "ansible-76-lb" {
+resource "yandex_alb_load_balancer" "project" {
   name = "ansible-76-load-balancer"
 
   network_id = yandex_vpc_network.network-1.id
@@ -81,7 +81,7 @@ resource "yandex_alb_load_balancer" "ansible-76-lb" {
     tls {
       default_handler {
         http_handler {
-          http_router_id = yandex_alb_http_router.ansible-76.id
+          http_router_id = yandex_alb_http_router.project.id
         }
         certificate_ids = [yandex_cm_certificate.project.id]
       }
@@ -98,19 +98,15 @@ resource "yandex_alb_load_balancer" "ansible-76-lb" {
 
 # https://registry.terraform.io/providers/yandex-cloud/yandex/0.95.0/docs/resources/alb_virtual_host
 resource "yandex_alb_virtual_host" "project-host" {
-  name           = "ansible-76-host"
-  http_router_id = yandex_alb_http_router.ansible-76.id
+  name           = "bulka-host"
+  http_router_id = yandex_alb_http_router.project.id
   route {
     name = "default-route"
     http_route {
       http_route_action {
-        backend_group_id = yandex_alb_backend_group.ansible-76.id
+        backend_group_id = yandex_alb_backend_group.project.id
         timeout          = "15s"
       }
     }
   }
-}
-
-output "load_balancer_ip_address" {
-  value = yandex_alb_load_balancer.ansible-76-lb.listener.0.endpoint.0.address.0.external_ipv4_address.0.address
 }

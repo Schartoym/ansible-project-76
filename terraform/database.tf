@@ -1,6 +1,6 @@
 # https://registry.terraform.io/providers/yandex-cloud/yandex/0.95.0/docs/resources/mdb_postgresql_cluster
 
-resource "yandex_mdb_postgresql_cluster" "ansible-76-cluster" {
+resource "yandex_mdb_postgresql_cluster" "project-cluster" {
   name        = "ansible-76-databse"
   environment = "PRODUCTION"
   network_id  = yandex_vpc_network.network-1.id
@@ -34,14 +34,14 @@ resource "yandex_mdb_postgresql_cluster" "ansible-76-cluster" {
 }
 
 resource "yandex_mdb_postgresql_user" "db-user" {
-  cluster_id = yandex_mdb_postgresql_cluster.ansible-76-cluster.id
+  cluster_id = yandex_mdb_postgresql_cluster.project-cluster.id
   name       = var.database_user
   password   = var.database_password
   conn_limit = 50
 }
 
 resource "yandex_mdb_postgresql_database" "db" {
-  cluster_id = yandex_mdb_postgresql_cluster.ansible-76-cluster.id
+  cluster_id = yandex_mdb_postgresql_cluster.project-cluster.id
   name       = var.database_name
   owner      = yandex_mdb_postgresql_user.db-user.name
   lc_collate = "ru_RU.UTF-8"
@@ -49,5 +49,5 @@ resource "yandex_mdb_postgresql_database" "db" {
 }
 
 output "database" {
-  value = yandex_mdb_postgresql_cluster.ansible-76-cluster.host.0.fqdn
+  value = yandex_mdb_postgresql_cluster.project-cluster.host.0.fqdn
 }

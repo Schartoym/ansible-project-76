@@ -12,7 +12,7 @@ resource "yandex_vpc_subnet" "subnet-1" {
 }
 
 #https://registry.terraform.io/providers/yandex-cloud/yandex/0.95.0/docs/resources/vpc_address
-resource "yandex_vpc_address" "ansible-76-lb-address" {
+resource "yandex_vpc_address" "lb-address" {
   name = "ansible-76-lb-address"
 
   external_ipv4_address {
@@ -21,5 +21,5 @@ resource "yandex_vpc_address" "ansible-76-lb-address" {
 }
 
 locals {
-  load_balancer_ip_address = yandex_vpc_address.ansible-76-lb-address.external_ipv4_address.0.address
+  load_balancer_ip_address = yandex_vpc_address.lb-address.external_ipv4_address.0.address
 }
