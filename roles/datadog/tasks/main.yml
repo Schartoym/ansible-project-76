@@ -1,5 +1,6 @@
 - name: Fail if "datadog_key" is undefined
-  ansible.builtin.fail: msg="Unable to install datadog - datadog_key is missing"
+  ansible.builtin.fail:
+    msg: "Unable to install datadog - datadog_key is missing"
   when: datadog_key is undefined
 
 - name: Install Datadog
