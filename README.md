@@ -35,6 +35,8 @@
 
 - [roles/redmine](roles/redmine) запускает Redmine на хостах
 
+- [roles/datadog](roles/datadog) устанавливает и запускает DataDog agent
+
 ### Группы хостов
 Хосты, на которые должен быть установлен Redmine выделены в группу `webservers`
 
