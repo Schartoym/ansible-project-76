@@ -68,3 +68,6 @@ make
 ```bash
 make edit-vault-webservers
 ```
+
+## Результат
+Решение развернуто на домене https://bulka.dev
