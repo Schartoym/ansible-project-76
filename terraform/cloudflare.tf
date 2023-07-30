@@ -1,14 +1,5 @@
-resource "cloudflare_account" "project" {
-  name = "Schartoym@gmail.com's Account"
-}
-
-resource "cloudflare_zone" "project-zone" {
-  account_id = cloudflare_account.project.id
-  zone       = var.domain_name
-}
-
 resource "cloudflare_record" "project-a-record" {
-  zone_id = cloudflare_zone.project-zone.id
+  zone_id = var.cloudflare_zone_id
   name    = "@"
   value   = local.load_balancer_ip_address
   type    = "A"
@@ -16,7 +7,7 @@ resource "cloudflare_record" "project-a-record" {
 }
 
 resource "cloudflare_record" "project-a-record-www" {
-  zone_id = cloudflare_zone.project-zone.id
+  zone_id = var.cloudflare_zone_id
   name    = "www"
   value   = local.load_balancer_ip_address
   type    = "A"
@@ -25,7 +16,7 @@ resource "cloudflare_record" "project-a-record-www" {
 
 
 resource "cloudflare_record" "project-acme-cname" {
-  zone_id = cloudflare_zone.project-zone.id
+  zone_id = var.cloudflare_zone_id
   name    = "_acme-challenge"
   value   = "${yandex_cm_certificate.project.id}.cm.yandexcloud.net"
   type    = "CNAME"
@@ -33,7 +24,7 @@ resource "cloudflare_record" "project-acme-cname" {
 }
 
 resource "cloudflare_record" "project-acme-cname-www" {
-  zone_id = cloudflare_zone.project-zone.id
+  zone_id = var.cloudflare_zone_id
   name    = "_acme-challenge.www.${var.domain_name}"
   value   = "${yandex_cm_certificate.project.id}.cm.yandexcloud.net"
   type    = "CNAME"

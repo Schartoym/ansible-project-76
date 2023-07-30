@@ -63,3 +63,10 @@ variable "domain_name" {
   type = string
   description = "Domain name"
 }
+
+
+variable "cloudflare_zone_id" {
+  type = string
+  sensitive = true
+  description =  "Cloudflare Zone Id"
+}
